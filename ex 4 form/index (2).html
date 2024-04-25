@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Details</title>
+    <style>
+        body {
+            background: url("https://img.freepik.com/free-vector/abstract-geometric-wireframe-background_52683-59421.jpg?size=626&ext=jpg&ga=GA1.1.1224184972.1713830400&semt=ais") no-repeat;
+            background-size: cover;
+        }
+        .details {
+            
+            padding: 20px;
+            margin: 0 auto;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1><center>Form Details</center></h1>
+
+    <div class="details" id="formDetails">
+        <!-- Form details will be displayed here -->
+    </div>
+
+    <script>
+        function getQueryStringParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const keyValuePairs = queryString.split("&");
+
+            for (const pair of keyValuePairs) {
+                const [key, value] = pair.split("=");
+                params[key] = decodeURIComponent(value);
+            }
+
+            return params;
+        }
+
+        function displayFormDetails() {
+            const params = getQueryStringParams();
+            const detailsElement = document.getElementById("formDetails");
+
+            const technicalEvents = params.technicalEvents.split(",").join(", ");
+            const nonTechnicalEvents = params.nonTechnicalEvents.split(",").join(", ");
+
+            const details = `
+                <p><strong>First Name:</strong> ${params.fname}</p>
+                <p><strong>Last Name:</strong> ${params.lname}</p>
+                <p><strong>Gender:</strong> ${params.gender}</p>
+                <p><strong>Email:</strong> ${params.email}</p>
+                <p><strong>Phone:</strong> ${params.phone}</p>
+                <p><strong>College:</strong> ${params.college}</p>
+                <p><strong>Branch:</strong> ${params.branch}</p>
+                <p><strong>Technical Events:</strong> ${technicalEvents}</p>
+                <p><strong>Non-Technical Events:</strong> ${nonTechnicalEvents}</p>
+            `;
+
+            detailsElement.innerHTML = details;
+        }
+
+        displayFormDetails();
+    </script>
+</body>
+</html>
